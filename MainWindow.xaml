@@ -1,0 +1,94 @@
+﻿<Window x:Class="Dev_interface.MainWindow"
+    xmlns:taglib="clr-namespace:TagLib;assembly=TagLib"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:Dev_interface"
+    mc:Ignorable="d"
+    Title="WolfBeat" WindowState="Maximized">
+    <Window.Icon>
+        <ImageSource>C:\Users\Marcos\Documents\extensao\Dev_interface\Resources\home1.png</ImageSource>
+    </Window.Icon>
+    <Window.Resources>
+        <Style x:Key="LeftMenu" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Rubik"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="40, 0, 0, 0"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="#272727">            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" x:Name="GridPrincipal">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="10*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" x:Name="Menu" Background="#202020">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="14*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="Início" MouseDown="Menu_Click" Style="{StaticResource LeftMenu}"/>
+                <TextBlock Grid.Row="1" Text="Biblioteca de músicas" MouseDown="Music_Click" Style="{StaticResource LeftMenu}"/>
+                <TextBlock Grid.Row="2" Text="Biblioteca de vídeos" MouseDown="Video_Click" Style="{StaticResource LeftMenu}"/>
+                <Image Source="C:\Users\Marcos\Documents\extensao\Dev_interface\Resources\home.png" MouseDown="Menu_Click" Grid.Row="0"  Width="20" Height="20" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                <Image Source="C:\Users\Marcos\Documents\extensao\Dev_interface\Resources\Music.png" MouseDown="Music_Click" Grid.Row="1"  Width="20" Height="20" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                <Image Source="C:\Users\Marcos\Documents\extensao\Dev_interface\Resources\video.png" MouseDown="Video_Click" Grid.Row="2"  Width="20" Height="20" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                <Border BorderBrush="White" BorderThickness="0,1,0,0" Grid.Row="3"/>
+                <TextBlock Grid.Row="4" Text="Fila de reprodução" Style="{StaticResource LeftMenu}"/>
+                <Image Source="C:\Users\Marcos\Documents\extensao\Dev_interface\Resources\playlist1.png" Grid.Row="4"  Width="20" Height="20" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                <TextBlock Grid.Row="5" Text="Playlists" Style="{StaticResource LeftMenu}"/>
+                <Image Source="C:\Users\Marcos\Documents\extensao\Dev_interface\Resources\library.png" Grid.Row="5"  Width="20" Height="20" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+            </Grid>
+
+                <Grid Grid.Column="1">
+                <Grid >
+                    <MediaElement Name="mediaElement" LoadedBehavior="Manual"/>
+                </Grid>
+                <Grid x:Name="List_Video">
+                    <ListBox x:Name="listBoxVideos" SelectionChanged="listBoxVideos_SelectionChanged" SelectionMode="Single" Background="Transparent" Foreground="white"/>
+                </Grid>
+                <Grid x:Name="List_Music" Visibility="Collapsed">
+                    <ListBox x:Name="listBoxSongs" SelectionChanged="listBoxSongs_SelectionChanged" SelectionMode="Single" Background="Transparent" Foreground="white" ItemsSource="{Binding Source.UriSchemeHttp, BindsDirectlyToSource=True, ElementName=mediaElement}"/>
+                </Grid>
+                <Grid x:Name="Inicio" Visibility="Collapsed">
+                    
+                </Grid>
+            </Grid>           
+        </Grid>
+
+        <Grid Grid.Row="1" Background="#272727" Name="Control_Media">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Image x:Name="playButton" Source="C:\Users\Marcos\Documents\extensao\Dev_interface\Resources\play.png" MouseDown="PlayButton_Click" Grid.Column="1"  Width="30" Height="30" Margin="0,10,0,0"/>
+            <Image x:Name="pauseButton" Source="C:\Users\Marcos\Documents\extensao\Dev_interface\Resources\pause.png" MouseDown="PauseButton_Click" Grid.Column="1"  Width="30" Height="30" Margin="0,10,0,0" Visibility="Collapsed"/>
+            <Image Source="C:\Users\Marcos\Documents\extensao\Dev_interface\Resources\esquerda.png" MouseDown="Previous_Click" Grid.Column="1" Width="20" Height="20" Margin="-100,10,0,0"/>
+            <Image Source="C:\Users\Marcos\Documents\extensao\Dev_interface\Resources\direita.png" MouseDown="Next_Click" Grid.Column="1" Width="20" Height="20" Margin="100,10,0,0"/>
+            <Image x:Name="MuteButton" Source="C:\Users\Marcos\Documents\extensao\Dev_interface\Resources\volume.png" MouseDown="MuteButton_Click" Grid.Column="2" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"/>
+            <Image x:Name="PlaySoundButton" Source="C:\Users\Marcos\Documents\extensao\Dev_interface\Resources\mute.png" MouseDown="PlaySoundButton_Click" Grid.Column="2" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0" Visibility="Collapsed"/>
+            <Image x:Name="ExpenseButton" Source="C:\Users\Marcos\Documents\extensao\Dev_interface\Resources\expandir.png" MouseDown="FullScreenButton_Click" Grid.Column="2" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="40,0,0,0"/>
+            <Image x:Name="PopUpButton" Source="C:\Users\Marcos\Documents\extensao\Dev_interface\Resources\popup.png" MouseDown="ShowFloatingMediaWindow_Click" Grid.Column="2" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="80,0,0,0"/>
+            <Slider x:Name="volumeSlider" Width="100" Grid.Column="2" ValueChanged="VolumeSlider_ValueChanged" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="120,0,0,0" Background="{x:Null}" Value="0" Maximum="1" SmallChange="0.01" LargeChange="0.1"/>
+            <Slider x:Name="Tempo_reprodução" Height="20" Width="900" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" Grid.Column="1" Value="0" Maximum="1" SmallChange="0.01" LargeChange="0.1"/>
+            <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,-2,0" Grid.ColumnSpan="3"/>
+        </Grid>
+    </Grid>
+</Window>
